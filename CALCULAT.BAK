@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+ char operator_char;
+ float a,b,result;
+ clrscr();
+ printf("enter the operator(+,-,*,/)");
+ scanf(" %c",&operator_char);
+ printf("enter the number");
+ scanf("%f%f",&a,&b);
+ if (operator_char == '+')
+ {
+ result=a+b;
+ printf("\n result is %f",result);
+ }
+ else if (operator_char == '-')
+ {
+ result=a-b;
+ printf("result is %f",result);
+ }
+ else if (operator_char == '*')
+ {
+ result=a*b;
+ printf("result is %f",result);
+ }
+ else
+ {
+ result=a/b;
+ printf("result is %f",result);
+ }
+ getch();
+}
