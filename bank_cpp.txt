@@ -1,0 +1,101 @@
+#include <iostream.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+class BankAccount {
+private:
+    int accNo;
+    char name[50];
+    float balance;
+
+public:
+    void createAccount() {
+        cout << "\n\tEnter Account Number: ";
+        cin >> accNo;
+        cout << "\tEnter Account Holder Name (First Name only): ";
+        cin >> name; 
+        cout << "\tEnter Initial Amount: ";
+        cin >> balance;
+        cout << "\n\tAccount Created Successfully!\n";
+    }
+
+    void displayAccount() {
+        cout << "\t" << accNo << "\t" << name << "\t\t" << balance << "\n";
+    }
+
+    void deposit() {
+        float amount;
+        cout << "\tEnter Amount to Deposit: ";
+        cin >> amount;
+        balance += amount;
+        cout << "\n\tDeposit Successful! Current Balance: Rs. " << balance << "\n";
+    }
+
+    int getAccNo() {
+        return accNo;
+    }
+};
+
+BankAccount accounts[100];
+int totalAccounts = 0;
+
+void main() {
+    int choice, searchAcc, i, found;
+
+    while(1) {
+        clrscr();
+        
+        cout << "\n\t\tBANK MANAGEMENT SYSTEM (C++)\n";
+        cout << "\t\t============================\n";
+        cout << "\t1. Create New Account\n";
+        cout << "\t2. Deposit Money\n";
+        cout << "\t3. View All Accounts\n";
+        cout << "\t4. Exit\n";
+        cout << "\n\tSelect an option (1-4): ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                cout << "\n\t--- Create New Account ---\n";
+                accounts[totalAccounts].createAccount();
+                totalAccounts++;
+                break;
+                
+            case 2:
+                cout << "\n\t--- Deposit Money ---\n";
+                cout << "\tEnter Account Number: ";
+                cin >> searchAcc;
+                found = 0;
+                for(i = 0; i < totalAccounts; i++) {
+                    if(accounts[i].getAccNo() == searchAcc) {
+                        accounts[i].deposit();
+                        found = 1;
+                        break;
+                    }
+                }
+                if(found == 0) {
+                    cout << "\n\tAccount Not Found!\n";
+                }
+                break;
+                
+            case 3:
+                cout << "\n\t--- All Accounts Details ---\n";
+                cout << "\tAcc No.\tName\t\tBalance\n";
+                cout << "\t--------------------------------------\n";
+                for(i = 0; i < totalAccounts; i++) {
+                    accounts[i].displayAccount();
+                }
+                break;
+                
+            case 4:
+                exit(0);
+                
+            default:
+                cout << "\n\tInvalid Option! Please try again.\n";
+        }
+        
+        cout << "\n\tPress any key to go back to main menu...";
+        getch();
+    }
+}
